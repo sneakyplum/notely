@@ -1,15 +1,18 @@
 "use client";
 
 
+import { sendEmail } from "@/app/actions";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 
 const SignUp = () => {
 
+  const router = useRouter();
 
   const formSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -28,20 +31,26 @@ const SignUp = () => {
     resolver: zodResolver(formSchema),
   });
 
-
+  
   const onSubmit = async (values: FormData) => {
     const { error } = await authClient.signUp.email({
-        name: values.name, // required
-        email: values.email, // required
-        password: values.password, // required
+      name: values.name, // required
+      email: values.email, // required
+      password: values.password, // required
     });
+    
+    const ResendEmail = await sendEmail();
 
     if (error) {
       console.error("Sign-up error:", error);
     }
 
-    redirect("/dashboard");
+    router.push("/dashboard")
+
+
   }
+
+
 
   return (
     <main>
