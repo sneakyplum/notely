@@ -1,6 +1,9 @@
 "use client";
 
+import Draggable from "@/components/draggable";
+import Droppable from "@/components/droppable";
 import { Button } from "@/components/ui/button";
+import { DragDropProvider } from "@dnd-kit/react";
 import { 
   startOfMonth, 
   endOfMonth, 
@@ -13,12 +16,13 @@ import {
 } from "date-fns";
 import { useState } from "react";
 
+
 const Dashboard = () => {
 
   const [viewingDate, setViewingDate] = useState(new Date());
 
-  // 1. Get the start and end of the grid (including padding for the week)
-  const firstDayOfMonth = startOfMonth(viewingDate); // The 1st
+
+  const firstDayOfMonth = startOfMonth(viewingDate); 
   const lastDayOfMonth = endOfMonth(viewingDate);
 
   const startingDayIndex = getDay(firstDayOfMonth);
@@ -28,13 +32,18 @@ const Dashboard = () => {
 
 
 
-  // 2. This gives you an array of every day to render in the grid
+
   const calendarDays = eachDayOfInterval({ start: firstDayOfMonth, end: lastDayOfMonth });
 
-//=> "3 days ago"
+  const [isDropped, setIsDropped] = useState(false);
+
+  const [stickyPosition, setStickyPosition] = useState<string | null>(null);
 
   return (
     <main>
+
+
+
 
       <div className="flex-col text-2xl justify-center items-center p-10">
         <div className="flex justify-center items-center gap-4">
@@ -46,8 +55,6 @@ const Dashboard = () => {
           <Button onClick={nextMonth} className="cursor-pointer text-2xl">Next Month</Button>
         </div>
 
-{/* 2. Day Labels (Sun, Mon, Tue...) */}
-
       </div>
     <div className="grid grid-cols-7 gap-2 px-30 mb-2">
       {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((label) => (
@@ -56,6 +63,7 @@ const Dashboard = () => {
         </div>
       ))}
     </div>
+
       <div className="grid grid-cols-7 gap-2 p-30 pt-0">
 
         {Array.from({ length: startingDayIndex }).map((_, index) => (
@@ -64,14 +72,48 @@ const Dashboard = () => {
 
 
 
-        {calendarDays.map((day) => (
-          <div key={day.toString()} className="border h-60 w-full p-2">
-            {day.getDate()}
-            
-            {/* This is where you would drop your Sticky Notes! */}
-          </div>
-        ))}
       </div>
+
+      <div>
+
+        <div >
+          <DragDropProvider
+            onDragEnd={(event) => {
+              const { operation } = event;
+              const { target } = operation;
+
+              if (target) {
+                // 'target.id' will be the ID of the Droppable day you hovered over
+                setStickyPosition(target.id as string);
+              }
+            }}
+          >
+            {/* The "Sidebar" where the sticky starts */}
+            <div className="w-30 h-30 bg-purple-600">
+              {/* Only show here if it hasn't been dropped on a day yet */}
+              {!stickyPosition && <Draggable  />}
+            </div>
+
+            <div className="grid grid-cols-7 gap-2 p-30 pt-0">
+              {calendarDays.map((day) => {
+                const dayId = format(day, 'yyyy-MM-dd'); // Unique ID for each day
+                
+                return (
+                  <Droppable id={dayId} key={dayId}>
+                    <div className="border border-black h-60 w-60 p-2">
+                      {day.getDate()}
+                      
+                      {/* If this specific day's ID matches our state, render the sticky here */}
+                      {stickyPosition === dayId && <Draggable />}
+                    </div>
+                  </Droppable>
+                );
+              })}
+            </div>
+          </DragDropProvider>
+        </div>
+      </div>
+
     </main>
   )
 }
