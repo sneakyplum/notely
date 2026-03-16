@@ -35,7 +35,7 @@ const Dashboard = () => {
 
   const calendarDays = eachDayOfInterval({ start: firstDayOfMonth, end: lastDayOfMonth });
 
-  const [isDropped, setIsDropped] = useState(false);
+
 
   const [stickyPosition, setStickyPosition] = useState<string | null>(null);
 
@@ -83,16 +83,24 @@ const Dashboard = () => {
               const { target } = operation;
 
               if (target) {
-                // 'target.id' will be the ID of the Droppable day you hovered over
-                setStickyPosition(target.id as string);
-              }
-            }}
-          >
-            {/* The "Sidebar" where the sticky starts */}
-            <div className="w-30 h-30 bg-purple-600">
-              {/* Only show here if it hasn't been dropped on a day yet */}
-              {!stickyPosition && <Draggable  />}
-            </div>
+                    // If it's the sidebar, set position to null to "reset" it
+                    if (target.id === "sidebar") {
+                      setStickyPosition(null);
+                    } else {
+                      // Otherwise, it's a calendar day
+                      setStickyPosition(target.id as string);
+                    }
+                  }
+                }}
+              >
+              
+              <Droppable id="sidebar">
+                  <div className="w-full h-45 bg-purple-600 mb-5 p-4 border-2 border-dashed border-purple-300">
+                    {/* Show here if it's back in the sidebar (stickyPosition is null) */}
+                    {!stickyPosition && <Draggable id="main-sticky" />}
+                    <p className="text-white text-sm">Drag back here to reset</p>
+                  </div>
+                </Droppable>
 
             <div className="grid grid-cols-7 gap-2 p-30 pt-0">
               {calendarDays.map((day) => {
@@ -110,6 +118,7 @@ const Dashboard = () => {
                 );
               })}
             </div>
+
           </DragDropProvider>
         </div>
       </div>
