@@ -1,5 +1,6 @@
 "use client";
 
+import { createStickyNote } from "@/app/actions";
 import Draggable from "@/components/draggable";
 import Droppable from "@/components/droppable";
 import { Button } from "@/components/ui/button";
@@ -38,6 +39,7 @@ const Dashboard = () => {
 
 
   const [stickyPosition, setStickyPosition] = useState<string | null>(null);
+
 
   return (
     <main>
@@ -97,8 +99,9 @@ const Dashboard = () => {
               <Droppable id="sidebar">
                   <div className="w-full h-45 bg-purple-600 mb-5 p-4 border-2 border-dashed border-purple-300">
                     {/* Show here if it's back in the sidebar (stickyPosition is null) */}
-                    {!stickyPosition && <Draggable id="main-sticky" />}
+                    {!stickyPosition && <Draggable  />}
                     <p className="text-white text-sm">Drag back here to reset</p>
+                    
                   </div>
                 </Droppable>
 
@@ -122,7 +125,25 @@ const Dashboard = () => {
           </DragDropProvider>
         </div>
       </div>
+      <div>
+        <form action={createStickyNote} className="flex flex-col gap-2 p-4 bg-gray-100 rounded">
+          <input name="content" placeholder="Task (e.g. Rough-in)" className="border p-2" required />
+          <input name="trade" placeholder="Trade (e.g. Electrical)" className="border p-2" required />
+          <input name="duration" type="number" placeholder="Task (e.g. 1)" className="border p-2" required />
+          <input name="workers" type="number" placeholder="Trade (e.g. 1)" className="border p-2" required />
+          {/* The Color Picker */}
+          <div className="flex gap-2">
+            {['#EAB308', '#3B82F6', '#EF4444', '#22C55E'].map((color) => (
+              <label key={color} className="cursor-pointer">
+                <input type="radio" name="color" value={color} className="hidden peer" defaultChecked={color === '#EAB308'} />
+                <div style={{ backgroundColor: color }} className="w-8 h-8 rounded-full peer-checked:ring-2 ring-black" />
+              </label>
+            ))}
+          </div>
 
+          <Button type="submit">Add Sticky</Button>
+        </form>
+      </div>
     </main>
   )
 }

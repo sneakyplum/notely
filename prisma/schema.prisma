@@ -18,6 +18,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
+  stickynote StickyNote[]
 
   @@unique([email])
   @@map("user")
@@ -69,4 +70,20 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+
+model StickyNote {
+  id    String @id @default(cuid())
+  color String @default("#8B5CF6")
+  trade String 
+  duration Int @default(1)
+  workers Int @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("stickynote")
 }
