@@ -4,7 +4,9 @@
 import { auth } from "@/lib/auth";
 
 import prisma from "@/lib/prisma";
-import { headers } from 'next/headers';
+import { revalidatePath } from "next/cache";
+import { cookies, headers } from 'next/headers';
+import { redirect } from "next/navigation";
 
 export async function sendEmail() {
   try {
@@ -45,8 +47,8 @@ export async function createStickyNote(formdata: FormData) {
   
   const userId = session?.user?.id;
 
-  if (!userId) {
-    throw new Error("You must be logged in to create a note");
+  if(!userId) {
+    throw new Error("couldnt find user")
   }
 
   await prisma.stickyNote.create({
@@ -59,5 +61,37 @@ export async function createStickyNote(formdata: FormData) {
     }
   })
 
+  revalidatePath("/dashboard");
+}
+
+export async function SignIn(formData: FormData) {
+  const emailInput = formData.get("email") as string;
+  const passwordInput = formData.get("password") as string;
+  const res = await auth.api.signInEmail({
+    body: {
+      email: emailInput,
+      password: passwordInput,
+    },
+    headers: await headers(),
+    asResponse: true, // This is the "Magic Switch"
+  });
+
+  if (!res.ok) {
+    console.log("Sign in failed");
+    return;
+  }
+
+  // 2. Grab the cookie from the Better Auth response 
+  // and manually give it to the Next.js cookie store
+  const cookieStore = await cookies();
+  const setCookie = res.headers.get("set-cookie");
+  
+  if (setCookie) {
+    // This is what makes it show up in your "Application" tab!
+    cookieStore.set("better-auth.session_token", setCookie); 
+  }
+
+  console.log("Sign in success!");
+  redirect("/dashboard");
 
 }

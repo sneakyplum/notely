@@ -12,6 +12,8 @@ import * as z from "zod";
 
 const SignUp = () => {
 
+
+
   const router = useRouter();
 
   const formSchema = z.object({
@@ -33,6 +35,9 @@ const SignUp = () => {
 
   
   const onSubmit = async (values: FormData) => {
+
+
+    
     const { error } = await authClient.signUp.email({
       name: values.name, // required
       email: values.email, // required
@@ -45,7 +50,7 @@ const SignUp = () => {
       console.error("Sign-up error:", error);
     }
 
-    router.push("/dashboard")
+    router.push("/sign-in")
 
 
   }
