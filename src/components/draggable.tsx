@@ -1,18 +1,22 @@
+import { useDraggable } from '@dnd-kit/react';
 
-import {useDraggable} from '@dnd-kit/react';
+// 1. Correct the types: duration and workers are numbers!
+interface DraggableProps {
+  id: string;
+  color: string;
+  trade: string;
+  duration: number; 
+  workers: number;
+}
 
-
-function Draggable({ id, color, trade, duration, workers}: { id: string, color: string, trade: string, duration: string, workers: string}) {
-
-
-
-
-  const {ref} = useDraggable({
-    id,
+function Draggable({ id, color, trade, duration, workers }: DraggableProps) {
+  // 2. Pass the actual 'id' prop into the hook
+  const { ref } = useDraggable({
+    id: id, 
   });
 
   return (
-    <button ref={ref} className='w-25 h-25 bg-amber-400' style={{ backgroundColor: color || '#fbbf24'}}>
+    <button className='w-30 h-30' ref={ref} style={{ backgroundColor: color || '#fbbf24' }}>
       {trade}
       {duration}
       {workers}

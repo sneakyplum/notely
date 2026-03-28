@@ -1,5 +1,6 @@
-
 "use server";
+
+
 
 import { auth } from "@/lib/auth";
 
@@ -44,8 +45,12 @@ export async function createStickyNote(formdata: FormData) {
     headers: await headers()
     
   })
+
   
   const userId = session?.user?.id;
+
+
+
 
   if(!userId) {
     throw new Error("couldnt find user")
@@ -60,8 +65,9 @@ export async function createStickyNote(formdata: FormData) {
       workers: workers,
     }
   })
+  revalidatePath("/");
 
-  revalidatePath("/dashboard");
+  return { success: true };
 }
 
 export async function SignIn(formData: FormData) {

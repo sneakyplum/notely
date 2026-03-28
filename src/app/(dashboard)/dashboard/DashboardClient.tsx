@@ -15,7 +15,7 @@ import {
   format,
   getDay
 } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const DashboardClient = ({ viewableStickyNotes }) => {
@@ -37,12 +37,11 @@ const DashboardClient = ({ viewableStickyNotes }) => {
   const calendarDays = eachDayOfInterval({ start: firstDayOfMonth, end: lastDayOfMonth });
 
 
-
-
-
   const [notes, setNotes] = useState(viewableStickyNotes);
 
-  console.log(viewableStickyNotes);
+  useEffect(() => {
+    setNotes(viewableStickyNotes);
+  }, [viewableStickyNotes]);
 
   return (
     <main>
@@ -175,7 +174,7 @@ const DashboardClient = ({ viewableStickyNotes }) => {
             ))}
           </div>
 
-          <Button type="submit">Add Sticky</Button>
+          <Button type="submit" >Add Sticky</Button>
         </form>
       </div>
     </main>
