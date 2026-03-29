@@ -64,12 +64,15 @@ const { data, error } = await authClient.signIn.email({
 
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="email" placeholder="email" {...register("email")}/>
-        <input type="password" placeholder="password" {...register("password")}/>
+    <div className="w-full h-full flex">
+      <div className="w-full h-full flex  justify-center items-center pt-30">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col border-2 border-black w-1/5 h-50 items-center justify-center">
+        <input type="email" placeholder="email" {...register("email")} className="border-2 border-gray-300"/>
+        <input type="password" placeholder="password" {...register("password")} className="border-2 border-gray-300"/>
         <button type="submit" disabled={isSubmitting}>Sign In</button>
       </form>
+
+      </div>
     </div>
   )
 }
