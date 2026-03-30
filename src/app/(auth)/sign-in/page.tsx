@@ -66,10 +66,15 @@ const { data, error } = await authClient.signIn.email({
   return (
     <div className="w-full h-full flex">
       <div className="w-full h-full flex  justify-center items-center pt-30">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col border-2 border-black w-1/5 h-50 items-center justify-center">
-        <input type="email" placeholder="email" {...register("email")} className="border-2 border-gray-300"/>
-        <input type="password" placeholder="password" {...register("password")} className="border-2 border-gray-300"/>
-        <button type="submit" disabled={isSubmitting}>Sign In</button>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col  w-100 h-150 items-center ">
+        <p className="font-serif text-3xl font-bold">Notely</p>
+        <label className="font-serif text-4sm items-start w-full">E-mail</label>
+        <input type="email" {...register("email")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-serif"/>
+        <label className="font-serif text-4sm items-start w-full mt-4">Password</label>
+        <input type="password" {...register("password")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-serif"/>
+        <button type="submit" disabled={isSubmitting} className="font-serif text-2xl cursor-pointer p-3 w-full bg-blue-700 text-white rounded-sm mt-10">Sign In</button>
+
+        <p className="font-serif text-3sm mt-4">Don't have an account? <a href="/sign-up" className="text-blue-700">Sign Up</a></p>
       </form>
 
       </div>

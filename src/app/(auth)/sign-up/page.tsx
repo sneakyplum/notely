@@ -59,21 +59,24 @@ const SignUp = () => {
 
   return (
     <main>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="Name" {...register("name")} />
-        {errors.name && <p>{errors.name.message}</p>}
+      <div className="w-full h-full flex  justify-center items-center pt-30">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col border-2 border-black rounded-lg w-100 h-150  gap-4 p-10 items-center ">
+          <input type="text" placeholder="Name" {...register("name")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"/>
+          {errors.name && <p>{errors.name.message}</p>}
 
-        <input type="text" placeholder="email" {...register("email")} />
-        {errors.email && <p>{errors.email.message}</p>}
+          <input type="text" placeholder="Email" {...register("email")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"/>
+          {errors.email && <p>{errors.email.message}</p>}
 
-        <input type="password" placeholder="Password" {...register("password")} />
-        {errors.password && <p>{errors.password.message}</p>}
+          <input type="password" placeholder="Password" {...register("password")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"  />
+          {errors.password && <p>{errors.password.message}</p>}
 
-        <input type="password" placeholder="Confirm Password" {...register("confirmPassword")} />
-        {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
+          <input type="password" placeholder="Confirm Password" {...register("confirmPassword")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"/>
+          {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
 
-        <button type="submit" disabled={isSubmitting}>Sign Up</button>
-      </form>
+          <button type="submit" disabled={isSubmitting} className="font-sans text-2xl cursor-pointer p-3 ">Sign Up</button>
+        </form>
+
+      </div>
     </main>
   )
 }
