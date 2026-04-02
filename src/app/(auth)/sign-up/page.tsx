@@ -58,26 +58,39 @@ const SignUp = () => {
 
 
   return (
-    <main>
-      <div className="w-full h-full flex  justify-center items-center pt-30">
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col border-2 border-black rounded-lg w-100 h-150  gap-4 p-10 items-center ">
-          <input type="text" placeholder="Name" {...register("name")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"/>
+    <div className="w-full h-lvh flex bg-blue-50 items-center justify-center flex-col">
+      <p className="text-4xl font-bold text-black mb-5">Sign up</p>
+      <div className="w-180 h-250 flex  justify-center items-center bg-white rounded-2xl border-6 border-gray-100 shadow-lg flex-col">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col  w-full h-full items-center p-10">
+          <p className="font-inter text-3xl font-bold mb-25">Notely</p>
+          <label className="font-inter text-4sm items-start w-full text-black">Name</label>
+          <input type="text" placeholder="Name" {...register("name")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-inter"/>
           {errors.name && <p>{errors.name.message}</p>}
 
-          <input type="text" placeholder="Email" {...register("email")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"/>
+          <label className="font-inter text-4sm items-start w-full mt-4 text-black">E-mail</label>
+          <input type="text" placeholder="Email" {...register("email")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-inter"/>
           {errors.email && <p>{errors.email.message}</p>}
 
-          <input type="password" placeholder="Password" {...register("password")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"  />
+          <label className="font-inter text-4sm items-start w-full mt-4 text-black">Password</label>
+          <input type="password" placeholder="Password" {...register("password")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-inter"  />
           {errors.password && <p>{errors.password.message}</p>}
 
-          <input type="password" placeholder="Confirm Password" {...register("confirmPassword")} className="border-2 border-gray-300 h-10 w-60 rounded-sm pl-2 font-sans"/>
+          <label className="font-inter text-4sm items-start w-full mt-4 text-black">Confirm Password</label>
+          <input type="password" placeholder="Confirm Password" {...register("confirmPassword")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-inter"/>
           {errors.confirmPassword && <p>{errors.confirmPassword.message}</p>}
 
-          <button type="submit" disabled={isSubmitting} className="font-sans text-2xl cursor-pointer p-3 ">Sign Up</button>
+          <button type="submit" disabled={isSubmitting} className="font-inter text-2xl cursor-pointer p-3 w-full bg-blue-700 text-white rounded-sm mt-10">Sign Up</button>
+
+          <p className="font-inter text-3sm mt-4">Already have an account? <a href="/sign-in" className="text-blue-700">Sign In</a></p>
+
+        <p className="mt-8">or</p>
+
+        <button className="font-inter text-2xl cursor-pointer p-3 w-full border-2 border-gray-300 text-black rounded-sm mt-4">Sign up with Google</button>
         </form>
 
       </div>
-    </main>
+
+    </div>
   )
 }
 

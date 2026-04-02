@@ -70,9 +70,9 @@ const { data, error } = await authClient.signIn.email({
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col  w-full h-full items-center p-10">
         <p className="font-inter text-3xl font-bold mb-25">Notely</p>
         <label className="font-inter text-4sm items-start w-full text-black">E-mail</label>
-        <input type="email" {...register("email")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-sans"/>
+        <input type="email" {...register("email")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-inter"/>
         <label className="font-inter text-4sm items-start w-full mt-4 text-black">Password</label>
-        <input type="password" {...register("password")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-sans"/>
+        <input type="password" {...register("password")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-inter"/>
         <button type="submit" disabled={isSubmitting} className="font-inter text-2xl cursor-pointer p-3 w-full bg-blue-700 text-white rounded-sm mt-10">Sign In</button>
 
         <p className="font-inter text-3sm mt-4">Don't have an account? <a href="/sign-up" className="text-blue-700">Sign Up</a></p>
