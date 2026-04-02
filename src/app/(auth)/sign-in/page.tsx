@@ -75,7 +75,7 @@ const { data, error } = await authClient.signIn.email({
         <input type="password" {...register("password")} className="border-2 border-gray-300 h-12 w-full rounded-sm pl-2 font-inter"/>
         <button type="submit" disabled={isSubmitting} className="font-inter text-2xl cursor-pointer p-3 w-full bg-blue-700 text-white rounded-sm mt-10">Sign In</button>
 
-        <p className="font-inter text-3sm mt-4">Don't have an account? <a href="/sign-up" className="text-blue-700">Sign Up</a></p>
+        <p className="font-inter text-3sm mt-4">Don't have an account? <a href="/sign-up" className="text-blue-700 hover:underline">Sign Up</a></p>
 
         <p className="mt-8">or</p>
 

@@ -81,7 +81,7 @@ const SignUp = () => {
 
           <button type="submit" disabled={isSubmitting} className="font-inter text-2xl cursor-pointer p-3 w-full bg-blue-700 text-white rounded-sm mt-10">Sign Up</button>
 
-          <p className="font-inter text-3sm mt-4">Already have an account? <a href="/sign-in" className="text-blue-700">Sign In</a></p>
+          <p className="font-inter text-3sm mt-4">Already have an account? <a href="/sign-in" className="text-blue-700 hover:underline">Sign In</a></p>
 
         <p className="mt-8">or</p>
 
