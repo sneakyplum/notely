@@ -6,7 +6,7 @@ export default function Home() {
       <div >
         <header className="p-4 flex flex-row w-full justify-between items-center mt-2 position: fixed">
           <div>
-            <h1 className="text-4xl font-inter justify-between items-center ml-6">Notely</h1>
+            <h1 className="text-4xl font-inter justify-between items-center ml-6 font-inter font-bold text-blue-700">Notely</h1>
 
           </div>
           <div className="gap-10 flex text-xl items-center justify-center">
@@ -24,7 +24,7 @@ export default function Home() {
           <h1 className="font-inter font-bold text-5xl/20  font-stretch-expanded">
             Project Management Software For <br />Superintendents, Foremen, And Project Managers.
           </h1>
-          <h5 className="font-inter font-stretch-expanded pr-5 mt-5 text-xl text-gray-600">
+          <h5 className="font-inter font-stretch-expanded pr-5 mt-5 text-xl text-gray-600 w-8/10">
             Pull Planning for superintendents, foremen, and project managers. Notely is a construction project management software that helps you plan, track and manage your projects more efficiently.
           </h5>
           <div className="flex w-full items-center justify-start pt-4">
