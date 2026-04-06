@@ -1,65 +1,50 @@
-import Image from "next/image";
+
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div >
+      <div >
+        <header className="p-4 flex flex-row w-full justify-between items-center mt-2 position: fixed">
+          <div>
+            <h1 className="text-4xl font-inter justify-between items-center ml-6 font-inter font-bold text-blue-700">Notely</h1>
+
+          </div>
+          <div className="gap-10 flex text-xl items-center justify-center">
+            <button className="cursor-pointer font-inter p-2">Product</button>
+            <button className="cursor-pointer font-inter p-2">Features</button>
+            <button className="cursor-pointer font-inter p-2">Pricing</button>
+          </div>
+          <div className="flex flex-row  items-center bg-blue-600 text-l rounded-sm mr-10">
+            <a href="/sign-up" className="w-full h-full cursor-pointer p-2 pl-6 pr-6 text-white font-inter">Get Started</a>
+          </div>
+        </header>
+      </div>
+      <div className="w-full h-dvh flex  justify-start pl-20">
+        <div className="w-2/4 h-full flex flex-col justify-center items-start pb-50">
+          <h1 className="font-inter font-bold text-5xl/20  font-stretch-expanded">
+            Project Management Software For <br />Superintendents, Foremen, And Project Managers.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <h5 className="font-inter font-stretch-expanded pr-5 mt-5 text-xl text-gray-600 w-8/10">
+            Pull Planning for superintendents, foremen, and project managers. Notely is a construction project management software that helps you plan, track and manage your projects more efficiently.
+          </h5>
+          <div className="flex w-full items-center justify-start pt-4">
+            <button className="text-lg/15 ">
+              <a href="/sign-up" className=" cursor-pointer text-white font-inter bg-blue-600 rounded-sm pl-5 pr-5 p-3">Get Started for Free</a>
+            </button>
+
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
+      <div>
+        <footer>
+          <div>
+            <h1 className="text-center font-inter text-gray-500 mt-10 mb-10">© 2026 Notely. All rights reserved.</h1>
+            <button><a href="/terms">Terms of Service</a></button>
+            <button><a href="/privacy">Privacy Policy</a></button>
+          </div>
+
+        </footer>
+      </div>
     </div>
   );
 }
