@@ -4,10 +4,12 @@
 
 import { auth } from "@/lib/auth";
 
+
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { cookies, headers } from 'next/headers';
 import { redirect } from "next/navigation";
+
 
 export async function sendEmail() {
   try {
@@ -65,7 +67,7 @@ export async function createStickyNote(formdata: FormData) {
       workers: workers,
     }
   })
-  revalidatePath("/");
+  revalidatePath("/dashboard");
 
   return { success: true };
 }

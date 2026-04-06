@@ -61,7 +61,18 @@ const { data, error } = await authClient.signIn.email({
 })
   }
 
-  console.log(onSubmit)
+  const googleSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard",
+    });
+
+    if(!data) {
+      throw new Error("Google sign-in failed");
+    } else {
+      router.push("/dashboard");
+    }
+  };
 
 
   return (
@@ -87,7 +98,9 @@ const { data, error } = await authClient.signIn.email({
 
           <p className="mt-8">or</p>
 
-          <button className="font-inter text-2xl cursor-pointer p-3 w-full border-2 border-gray-300 text-black rounded-sm mt-4">Sign In with Google</button>
+          <button className="font-inter text-2xl cursor-pointer p-3 w-full border-2 border-gray-300 text-black rounded-sm mt-4" onClick={googleSignIn}>
+            Sign In with Google
+          </button>
         </form>
 
         </div>

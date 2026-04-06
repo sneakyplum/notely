@@ -4,6 +4,7 @@ import { createStickyNote } from "@/app/actions";
 import Draggable from "@/components/draggable";
 import Droppable from "@/components/droppable";
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
 import { DragDropProvider } from "@dnd-kit/react";
 import { 
   startOfMonth, 
@@ -15,10 +16,13 @@ import {
   format,
   getDay
 } from "date-fns";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 
 const DashboardClient = ({ viewableStickyNotes }) => {
+
+  const router = useRouter();
 
   const [viewingDate, setViewingDate] = useState(new Date());
 
@@ -43,10 +47,22 @@ const DashboardClient = ({ viewableStickyNotes }) => {
     setNotes(viewableStickyNotes);
   }, [viewableStickyNotes]);
 
+  const signOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/sign-in"); // redirect to login page
+        },
+      },
+    });
+  };
+
   return (
     <main>
 
-
+      <header>
+        <button onClick={signOut} className="font-inter text-2xl cursor-pointer p-3 w-full border-2 border-gray-300 text-black rounded-sm mt-4">Sign Out</button>
+      </header>
 
 
       <div className="flex-col text-2xl justify-center items-center p-10">
@@ -60,23 +76,8 @@ const DashboardClient = ({ viewableStickyNotes }) => {
         </div>
 
       </div>
-    <div className="grid grid-cols-7 gap-2 px-30 mb-2">
-      {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((label) => (
-        <div key={label} className="text-center font-bold text-sm uppercase text-black">
-          {label}
-        </div>
-      ))}
-    </div>
-
-      <div className="grid grid-cols-7 gap-2 p-30 pt-0">
-
-        {Array.from({ length: startingDayIndex }).map((_, index) => (
-          <div key={`empty-${index}`} className="h-60 w-full bg-gray-50/50 border border-dashed border-gray-200" />
-        ))}
 
 
-
-      </div>
 
       <div>
 
@@ -107,7 +108,7 @@ const DashboardClient = ({ viewableStickyNotes }) => {
               >
               
               <Droppable id="sidebar">
-                <div className="w-full min-h-32 bg-purple-600 mb-5 p-4 border-2 border-dashed border-purple-300 grid grid-cols-2 gap-2">
+                <div className="w-full min-h-50 bg-purple-600 mb-5 p-4 border-2 border-dashed border-purple-300 grid grid-cols-2 gap-2">
                   {notes
                     .filter(note => !note.targetDate) // Only show notes that don't have a date yet
                     .map((note) => (
@@ -124,8 +125,21 @@ const DashboardClient = ({ viewableStickyNotes }) => {
                 </div>
               </Droppable>
 
+            <div className="grid grid-cols-7 gap-2 px-30 mb-2">
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((label) => (
+                <div key={label} className="text-center font-bold text-sm uppercase text-black">
+                  {label}
+                </div>
+              ))}
+            </div>
+
             <div className="grid grid-cols-7 gap-2 p-30 pt-0">
+              {Array.from({ length: startingDayIndex }).map((_, index) => (
+                <div key={`empty-${index}`} className="h-60 w-full bg-gray-50/50 border border-dashed border-gray-200" />
+              ))}
+
               {calendarDays.map((day) => {
+                
                 const dayId = format(day, 'yyyy-MM-dd'); // Unique ID for each day
                 
 

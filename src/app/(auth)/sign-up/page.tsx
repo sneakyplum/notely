@@ -56,7 +56,18 @@ const SignUp = () => {
 
   }
 
+  const googleSignIn = async () => {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/dashboard",
+    });
 
+    if(!data) {
+      throw new Error("Google sign-in failed");
+    } else {
+      router.push("/dashboard");
+    }
+  };
 
   return (
     <div className=" bg-blue-50">
@@ -92,7 +103,9 @@ const SignUp = () => {
 
             <p className="mt-8">or</p>
 
-            <button className="font-inter text-2xl cursor-pointer p-3 w-full border-2 border-gray-300 text-black rounded-sm mt-4">Sign up with Google</button>
+            <button className="font-inter text-2xl cursor-pointer p-3 w-full border-2 border-gray-300 text-black rounded-sm mt-4" onClick={googleSignIn}>
+              Sign up with Google
+            </button>
             </form>
 
         </div>

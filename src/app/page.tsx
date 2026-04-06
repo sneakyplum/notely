@@ -35,6 +35,16 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div>
+        <footer>
+          <div>
+            <h1 className="text-center font-inter text-gray-500 mt-10 mb-10">© 2026 Notely. All rights reserved.</h1>
+            <button><a href="/terms">Terms of Service</a></button>
+            <button><a href="/privacy">Privacy Policy</a></button>
+          </div>
+
+        </footer>
+      </div>
     </div>
   );
 }
